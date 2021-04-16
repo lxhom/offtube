@@ -1,0 +1,8 @@
+{
+  "name": "offtube",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node offtube",
+    "dev": "node offtube --r -l 3"
+  }
+}

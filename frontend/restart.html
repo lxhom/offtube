@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restarting...</title>
+  <style>
+    #snake {
+        border: 2px solid black;
+        font-size: 250%;
+        line-height: 19px;
+        font-family: monospace;
+        width: fit-content;
+        padding: 5px;
+        color: #0f0;
+        background-color: #000;
+    }
+    #snake:first-line {
+        line-height: 40px;
+    }
+  </style>
+  <script>
+    let speed = 250;
+    let stopped = false;
+    window.onload = () => {
+
+      let el = document.querySelector("#snake")
+
+      let dims = [10, 10];
+      let snakePos = [Math.floor(10*Math.random()), Math.floor(10*Math.random())];
+      let applePos = [Math.floor(10*Math.random()), Math.floor(10*Math.random())];
+      let snake = [snakePos];
+      let direction = [0,0];
+      direction[Math.floor(2*Math.random())] = Math.floor(2*Math.random())*2-1
+      let len = 5;
+      let frame = () => {
+        if (!stopped) {
+          if (speed > 10) speed-=speed/200;
+          let newPart = JSON.parse(JSON.stringify(snake[0]))
+          newPart.forEach((v, i, a) => {
+            a[i] += direction[i]
+            if (a[i] >= dims[i]) a[i]=0;
+            if (a[i] < 0) a[i]=dims[i]-1;
+          })
+          snake = [newPart, ...snake];
+          if (newPart[0] === applePos[0] && newPart[1] === applePos[1]) {
+            len++;
+            applePos = [Math.floor(dims[0]*Math.random()), Math.floor(dims[1]*Math.random())];
+          }
+          while (snake.length > len) {
+            snake.pop()
+          }
+          if (newPart[0] !== applePos[0]) {
+            if (newPart[0] < applePos[0]) {
+              direction = [1, 0]
+            } else {
+              direction = [-1, 0]
+            }
+          } else {
+            if (newPart[1] < applePos[1]) {
+              direction = [0, 1]
+            } else {
+              direction = [0, -1]
+            }
+          }
+          let field = [];
+          for (let i = 0; i < dims[0]; i++) {
+            let row = [];
+            for (let j = 0; j < dims[1]; j++) {
+              row.push("∙")
+            }
+            field.push(row)
+          }
+          snake.forEach((part) => field[part[0]][part[1]] = "+")
+          field[snake[0][0]][snake[0][1]] = "o"
+          field[applePos[0]][applePos[1]] = "a"
+          let lenTex;
+          switch (String(len).length) {
+            case 0: {lenTex = "000"} break;
+            case 1: {lenTex = "00" + len} break;
+            case 2: {lenTex = "0" + len} break;
+            case 3: {lenTex = len} break;
+            default: {lenTex = "OVF"} break;
+          }
+          let out = `Length:${lenTex}\n`
+          field.forEach(row => out += row.join("") + "\n")
+
+          el.innerText = out
+        }
+        setTimeout(frame, speed)
+      }
+      frame()
+    }
+  </script>
+</head>
+<body>
+  <div>
+    <div id="snake"></div>
+    <span id="stop" onclick="stopped=!stopped">Pause</span>
+  </div>
+</body>
+</html>

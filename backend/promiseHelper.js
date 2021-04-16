@@ -1,0 +1,3 @@
+Object.defineProperty(Promise.prototype, "r", {get: ()=>this._?this.r:"Waiting... "+(this.then?this.then(r=>this.r=this._=r).catch(e=>this.e=this._=e):"")});
+Object.defineProperty(Promise.prototype, "e", {get: ()=>this._?this.e:"Waiting... "+(this.then?this.then(r=>this.r=this._=r).catch(e=>this.e=this._=e):"")});
+Object.defineProperty(Promise.prototype, "v", {get: ()=>this._?(this.e?this.e:this.r):"Waiting... "+(this.then?this.then(r=>this.r=this._=r).catch(e=>this.e=this._=e):"")});

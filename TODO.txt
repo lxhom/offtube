@@ -1,0 +1,28 @@
+Backend/Downloads:
+TODO:WIP    Already Downloaded Checker
+TODO:       Safe Download Remover
+TODO:       Set --sub-lang as a parameter in my frontend
+TODO:WIP    Add Streaming instead of normal file transfers
+TODO:       Add search API
+TODO:       Download info and then the video
+TODO:       Dont download large videos without asking
+Backend/Other:
+TODO:       Seen Video Storage
+TODO:       Local Video Recommendation Algorithm
+Frontend:
+TODO:WIP    Make the Subtitles synchronous
+(because how am i supposed to watch japanese cooking tutorials at 3am on a thursday knowing that i'll never actually follow it when i dont know what the heck is going on)
+TODO:WIP    Make the frontend actually play stuff
+TODO:WIP    Add HTML player
+TODO:WIP    Add metadata
+TODO:WIP    Add frontpage
+TODO:       Add interaction stuff
+TODO:       Add downloads GUI
+TODO:       Add search
+TODO:       Add lazy loading
+TODO:       Show Downloading Videos on TL
+TODO:       Add Priority Download button
+
+
+WIP: Work In Progress
+CURWOI: CURrently Working On It ⛛•➞
