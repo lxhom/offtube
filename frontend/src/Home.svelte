@@ -1,5 +1,5 @@
 <script>
-  import Thumbnail from "./Home/Thumbnail.svelte";
+  import Thumbnail from "./Thumbnail.svelte";
   let getVideos = async () => {
     let res = await fetch("/api/videos");
     let text = await res.text();

@@ -1,11 +1,10 @@
 process.chdir("backend");
-
+let args = process.argv.splice(2);
 
 (async () => {
   let error = false;
   let {log} = await import("./backend/log.js");
   let fs = require("fs");
-  let childProcess = require("child_process");
   log(2, "[wrapper] Starting OffTube Wrapper...");
   let cleanup = () => {
     try {
@@ -14,15 +13,21 @@ process.chdir("backend");
 
   };
   let launch = async () => {
+    let childProcess = require("child_process");
     try {
       error = await new Promise(resolve => {
         let error = "";
         log(2, "[wrapper] Launching OffTube Server...");
+        console.log(["--trace-uncaught",
+          "server.js",
+          ...args,
+          "--w"
+        ])
         let process = childProcess.spawn(
             "node",
             ["--trace-uncaught",
               "server.js",
-              //...process.argv.splice(2),
+              ...args,
               "--w"
             ]
         );
@@ -74,7 +79,6 @@ process.chdir("backend");
       }
         break;
       case "/api/status": {
-        console.log(error);
         res.writeHead(200, {"Content-Type": "text/plain; charset=UTF-8", "Access-Control-Allow-Origin": "*"});
         res.write(String(error));
         res.end();

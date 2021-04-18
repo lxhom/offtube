@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 // Default settings. You can edit these.
 
 let settings = {

@@ -3,7 +3,7 @@ import expressStatic from "express-static";
 import { settings } from "./settings.js";
 import { log } from "./log.js";
 import url from "url";
-import { getDownloadedVideos, getVideoData, getAvailableSubtitles } from "./downloads.js";
+import { getDownloadedVideos, getVideoData, getAvailableSubtitles, setWatchMetadata } from "./videos.js";
 import fs from "fs";
 
 log(1, "Starting OffTube...");
@@ -34,36 +34,43 @@ log(2, "POST handler registered.");
 
 log(2, "Registering API handlers...");
 app.get("/api/status", (req, res) => {
-  console.log(res);
   res.header("Access-Control-Allow-Origin", "*");
   res.send('{"started":true}');
 });
+
 app.get("/api/videos", (req, res) => {
   log(3, `Got video request, serving...`);
   res.send(JSON.stringify(getDownloadedVideos()));
 });
+
 app.get("/api/video/:id", (req, res) => {
   let id = req.params.id;
-  console.log(getVideoData(id));
   res.send(JSON.stringify(getVideoData(id)));
 });
+
 app.post("/api/bulkVideos", (req, res) => {
-  let videoArray = [];
-  try {
-    videoArray = JSON.parse(req.body);
-  } catch (e) {}
+  let videoArray;
+  videoArray = JSON.parse(req.body);
   let result = [];
   videoArray.forEach(id => {
     result.push(getVideoData(id));
   });
   res.send(JSON.stringify(result));
 });
+
 app.get("/api/subtitles/:id", (req, res) => {
   let id = req.params.id;
   res.send(JSON.stringify(getAvailableSubtitles(id)));
 });
+
 app.get("/api/crash", () => {
   process.kill(process.pid)
+})
+
+app.post("/api/watching", (req, res) => {
+  let data = JSON.parse(req.body);
+  setWatchMetadata(data);
+  res.send('{"sent": "true"}');
 })
 log(2, "API handlers registered.");
 
