@@ -9,6 +9,10 @@ TODO:       Dont download long videos without asking
 Backend/Other:
 TODO:       Seen Video Storage
 TODO:       Local Video Recommendation Algorithm
+Backend/Wrapper:
+TODO:       Implement server restart
+TODO:       Implement server reload / changes listener for all server files
+TODO:       Don't kill the app on server reloads
 Frontend:
 TODO:       Add Website Download
 TODO:       Make the website a PWA
