@@ -18,11 +18,6 @@ let args = process.argv.splice(2);
       error = await new Promise(resolve => {
         let error = "";
         log(2, "[wrapper] Launching OffTube Server...");
-        console.log(["--trace-uncaught",
-          "server.js",
-          ...args,
-          "--w"
-        ])
         let process = childProcess.spawn(
             "node",
             ["--trace-uncaught",
