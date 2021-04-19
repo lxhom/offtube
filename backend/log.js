@@ -5,8 +5,9 @@ levels[-1] = "disabled"
 
 let log = (level, message) => {
   if (level <= settings.logLevel) {
+    let date = new Date;
     console.log(
-      `[${(new Date).toISOString().substr(11,12)}]`,
+      `[${date.toLocaleTimeString()}.${date.getMilliseconds()}]`,
       `[${levels[level]}]`,
       message
     )

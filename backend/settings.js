@@ -61,14 +61,13 @@ argArrays.forEach(argArray => {
 if (settings.logLevel === 3) {
   let settingStrings = [];
   Object.entries(settings).forEach(pair => settingStrings.push(`${pair[0]}: \`${pair[1]}\``));
+  let date = new Date;
   console.log(
-      `[${(new Date).toISOString().substr(11, 12)}]`,
-      `[debug] [pre-start]`,
+      `[${date.toLocaleTimeString()}.${date.getMilliseconds()}]`,      `[debug] [pre-start]`,
       `ArgV: ${process.argv.join(" ")}`,
   );
   console.log(
-      `[${(new Date).toISOString().substr(11, 12)}]`,
-      `[debug] [pre-start]`,
+      `[${date.toLocaleTimeString()}.${date.getMilliseconds()}]`,      `[debug] [pre-start]`,
       `Settings: ${settingStrings.join(", ")}`,
   );
 }
