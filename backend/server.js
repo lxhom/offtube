@@ -12,7 +12,6 @@ log(2, "Initializing Express app...");
 const app = express();
 log(2, "Express app initialized.");
 
-
 log(2, "Registering request logging handler...");
 app.use((req, _res, next) => {
   log(3, `Got request for ${req.url}.`);
@@ -114,7 +113,6 @@ app.get("/stream/:video_id", (req, res) => {
 });
 log(2, "Streaming service registered.");
 
-
 log(2, "Creating & registering new Express Static instance for content...");
 let downloadStatic = expressStatic("../downloads/", {});
 log(2, "New Express Static instance for content created.");
@@ -133,14 +131,12 @@ app.use((req, res, next) => {
 });
 log(2, "New Express Static instance for content registered.");
 
-
 log(2, "Registering Express Static...");
 // noinspection JSCheckFunctionSignatures
 app.use(expressStatic("../frontend/public/", {}));
 log(2, "Express Static registered.");
 
 app.listen(settings.port, () => log(1, `OffTube started on port ${settings.port}.`));
-
 
 if (settings.reload) {
   log(1, "Live Reload enabled.")
